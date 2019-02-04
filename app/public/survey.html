@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Friend Finder</title>
+  <title>Friend Finder | Survey</title>
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,7 +15,164 @@
 </head>
 
 <body>
+  <div class="container main">
+    <br />
+    <h2>Survey Questions</h2>
+    <hr />
+    <h3><strong>About You</strong></h3>
+    <h4>Name (Required)</h4>
+    <input type="text" id="name" class="form-control" required />
+    <h4>Link to Photo Image (URL Required)</h4>
+    <input type="text" id="photo" class="form-control" required />
+    <hr />
+    <h3 class="mt-md-5"><strong>Question 1</strong></h3>
+    <h4>You like Pina Coladas</h4>
+    <select class="chosen-select" id="q1">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 2</strong></h3>
+    <h4>You enjoy getting caught in the rain</h4>
+    <select class="chosen-select" id="q2">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 3</strong></h3>
+    <h4>You're not into yoga</h4>
+    <select class="chosen-select" id="q3">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 4</strong></h3>
+    <h4>You have at least half of a brain</h4>
+    <select class="chosen-select" id="q4">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 5</strong></h3>
+    <h4>You like making love at midnight, in the dunes of the cape</h4>
+    <select class="chosen-select" id="q5">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 6</strong></h3>
+    <h4>You're not much into health food</h4>
+    <select class="chosen-select" id="q6">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 7</strong></h3>
+    <h4>You are into champagne</h4>
+    <select class="chosen-select" id="q7">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 8</strong></h3>
+    <h4>You frequently find yourself looking for love in the 'Personals' column of the newspaper</h4>
+    <select class="chosen-select" id="q8">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 9</strong></h3>
+    <h4>You know what song these questions are coming from</h4>
+    <select class="chosen-select" id="q9">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <h3 class="mt-md-5"><strong>Question 10</strong></h3>
+    <h4>You got a good chuckle out of this</h4>
+    <select class="chosen-select" id="q10">
+      <option value="1">1 (Strongly Disagree)</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5 (Strongly Agree)</option>
+    </select>
+    <br />
+    <br />
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitButton">
+      <i class="fa fa-check-circle"></i> Submit
+    </button>
+    <hr />
+    <footer class="footer">
+      <div class="container">
+        <p>
+          <a href="/api/answers">API link for all applicants</a> |
+          <a href="https://github.com/mspenski/friend-finder">GitHub Repo</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+  <script type="text/javascript">
+
+    // function for submit button to push responses
+    $("#submitButton").on("click", function (event) {
+      event.preventDefault();
+      var userInput = {
+        name: $("#name").val().trim(),
+        photo: $("#photo").val().trim(),
+        answers: [
+          $("#q1").val(),
+          $("#q2").val(),
+          $("#q3").val(),
+          $("#q4").val(),
+          $("#q5").val(),
+          $("#q6").val(),
+          $("#q7").val(),
+          $("#q8").val(),
+          $("#q9").val(),
+          $("#q10").val()
+        ]
+      }
+      console.log(userInput);
+      $.post("/api/friends", userInput, function (data) {
+        console.log(data);
+
+        if (data) {
+          $.ajax({ url: "/api/friends", method: "GET" })
+            .then(function (answersData) {
+              console.log(answersData);
+            })
+        } else {
+          alert("Something went wrong.....")
+        }
+      })
+    })
+
+  </script>
 
 </body>
+
 
 </html>
