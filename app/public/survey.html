@@ -124,7 +124,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Your most compatible friend is.....</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -134,14 +134,10 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
     </div>
-
-
-
 
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitButton" data-toggle="modal" data-target="#exampleModalCenter">
@@ -164,6 +160,7 @@
 
   <!-- JAVASCRIPT -->
   <script type="text/javascript">
+    // var friends = require("../data/friends.js")
 
     // function for submit button to push responses
     $("#submitButton").on("click", function (event) {
@@ -191,32 +188,47 @@
         if (data) {
           $.ajax({ url: "/api/friends", method: "GET" })
             .then(function (answersData) {
-              $(".modal-body").append(answersData[0].name + "<br>");
+              $(".modal-body").append("<h3>" + answersData[0].name + "</h3><br>");
               $(".modal-body").append("<img src =" + answersData[0].photo + " class='matchPic'>");
             })
         } else {
           alert("Something went wrong.....")
         }
-      })
-    })
-
+      });
+    });
 
     // function for comparing answers to those in the array of objects
+    // function compareResults() {
+    //   var dummyScore = 0;
+    //   var userScore = 0;
+    //   var difference;
+
+    //   for (var i = 0; i < friends.length; i++) {
+    //     for (var x = 0; x < friends[i].answers.length; x++) {
+    //       Math.abs(friends[i].answers[x]) - Math.abs(userInput[])
+    //     }
+    //   }
 
 
+      // function for appending best match to modal
 
-
-     //function for appending best match to modal
+    // }
 
 
 
   </script>
+
+  <!-- CSS -->
   <style>
     .matchPic {
-      object-fit: contain;
+      max-width: 200px;
+    }
+
+    .modal-body {
+      margin: 0 auto;
     }
   </style>
-</body>
 
+</body>
 
 </html>
