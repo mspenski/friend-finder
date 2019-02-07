@@ -16,8 +16,8 @@ var friendsArray = [
     ]
   },
   {
-    "name": "Not Rupert Holmes",
-    "photo": "https://images-na.ssl-images-amazon.com/images/I/71cabFcIvUL._SL1048_.jpg",
+    "name": "Kip",
+    "photo": "https://media.giphy.com/media/UbD6c9YyD0SPu/giphy.gif",
     "answers": [
       3,
       3,
@@ -32,8 +32,8 @@ var friendsArray = [
     ]
   },
   {
-    "name": "Definitely  not Rupert Holmes",
-    "photo": "https://images-na.ssl-images-amazon.com/images/I/71cabFcIvUL._SL1048_.jpg",
+    "name": "Uncle Rico",
+    "photo": "https://media3.giphy.com/media/3og0ItJYGVoVNEeDlu/giphy.gif",
     "answers": [
       1,
       1,

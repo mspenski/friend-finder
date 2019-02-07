@@ -119,8 +119,8 @@
     <br />
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -133,14 +133,15 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitButton" data-toggle="modal" data-target="#exampleModalCenter">
+    <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitButton" data-toggle="modal"
+      data-target="#exampleModalCenter">
       <i class="fa fa-check-circle"></i> Submit
     </button>
 
@@ -150,7 +151,8 @@
     <footer class="footer">
       <div class="container">
         <p>
-          <a href="/api/answers">API link for all applicants</a> | <a href="https://github.com/mspenski/friend-finder">GitHub
+          <a href="/api/friends">API link for all applicants</a> | <a
+            href="https://github.com/mspenski/friend-finder">GitHub
             Repo</a>
         </p>
       </div>
@@ -160,7 +162,6 @@
 
   <!-- JAVASCRIPT -->
   <script type="text/javascript">
-    // var friends = require("../data/friends.js")
 
     // function for submit button to push responses
     $("#submitButton").on("click", function (event) {
@@ -181,47 +182,64 @@
           $("#q10").val()
         ]
       };
-      console.log("Entry Added: " + userInput);
 
       $.post("/api/friends", userInput, function (data) {
+        var user = userInput
 
         if (data) {
           $.ajax({ url: "/api/friends", method: "GET" })
             .then(function (answersData) {
-              $(".modal-body").append("<h3>" + answersData[0].name + "</h3><br>");
-              $(".modal-body").append("<img src =" + answersData[0].photo + " class='matchPic'>");
-            })
+              // clear modal
+              $(".modal-body").empty();
+
+              var bestMatch = {
+                name: "",
+                photo: "",
+                answers: [],
+                difference: 41
+              }
+
+              function compareFriends() {
+                var differenceArray = [];
+                var differenceTotal = 0;
+
+                for (var i = 0; i < answersData.length - 1; i++) {
+                  differenceArray = [];
+                  for (var j = 0; j < answersData[i].answers.length; j++) {
+                    differenceTotal += Math.abs(answersData[i].answers[j] - user.answers[j]);
+                    answersData[i].difference = differenceTotal;
+                  }
+                  console.log(answersData[i].difference);
+                  differenceTotal = 0;
+                }
+              }
+
+              function findMatch() {
+
+                for (var k = 0; k < answersData.length - 1; k++) {
+                  if (answersData[k].difference < bestMatch.difference) {
+                    bestMatch = answersData[k];
+                  }
+                }
+                differenceArray = [];
+              }
+              compareFriends();
+              findMatch();
+
+              $(".modal-body").append("<h3>" + bestMatch.name + "</h3><br>");
+              $(".modal-body").append("<img src =" + bestMatch.photo + " class='matchPic'>");
+            });
         } else {
           alert("Something went wrong.....")
         }
       });
     });
-
-    // function for comparing answers to those in the array of objects
-    // function compareResults() {
-    //   var dummyScore = 0;
-    //   var userScore = 0;
-    //   var difference;
-
-    //   for (var i = 0; i < friends.length; i++) {
-    //     for (var x = 0; x < friends[i].answers.length; x++) {
-    //       Math.abs(friends[i].answers[x]) - Math.abs(userInput[])
-    //     }
-    //   }
-
-
-      // function for appending best match to modal
-
-    // }
-
-
-
   </script>
 
   <!-- CSS -->
   <style>
     .matchPic {
-      max-width: 200px;
+      max-width: 400px;
     }
 
     .modal-body {
